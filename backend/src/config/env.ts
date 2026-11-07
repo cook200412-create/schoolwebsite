@@ -26,6 +26,7 @@ const schema = z.object({
   RAZORPAY_KEY_SECRET: z.string().optional(),
   RAZORPAY_WEBHOOK_SECRET: z.string().optional(),
   UPLOAD_DIR: z.string().default('uploads'),
+  TRUST_PROXY: z.coerce.number().int().min(0).max(5).default(1),
   COOKIE_SAMESITE: z.enum(['lax', 'strict', 'none']).default('lax'),
 });
 

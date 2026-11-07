@@ -4,12 +4,13 @@ services:
     name: ssv-api
     runtime: node
     rootDir: backend
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci --include=dev && npm run build   # devDependencies needed for tsc
     startCommand: npm start
     healthCheckPath: /api/health
     autoDeploy: true
     envVars:
       - { key: NODE_ENV, value: production }
+      - { key: TRUST_PROXY, value: "2" }          # Vercel rewrite + Render load balancer
       - { key: MONGODB_URI, sync: false }
       - { key: CLIENT_ORIGINS, sync: false }      # e.g. https://school.example.org
       - { key: CLIENT_URL, sync: false }

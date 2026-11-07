@@ -13,7 +13,8 @@ import { api } from './routes';
 
 export function createApp() {
   const app = express();
-  app.set('trust proxy', 1);
+  // hops of trusted proxies in front of the API (Vercel rewrite + Render LB = 2) so rate limits see the real client IP
+  app.set('trust proxy', env.TRUST_PROXY);
 
   app.use(helmet());
   app.use(
